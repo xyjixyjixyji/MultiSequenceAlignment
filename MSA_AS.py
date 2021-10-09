@@ -66,7 +66,7 @@ def AStar2d(seq1, seq2, scores=None):
     
     m, n = len(seq1), len(seq2)
     path = {}
-    close_list = []
+    close_list = [[0 for _ in range(n + 1)] for _ in range(m + 1)]
     # seq1: x
     # seq2: y
     s_match, s_sub, s_gap = scores.get('match', 0), scores.get('sub', 3), scores.get('gap', 2)
@@ -87,11 +87,12 @@ def AStar2d(seq1, seq2, scores=None):
     traversed = 0
     while (q.empty() is False):
         cur_cost, prev_op, prev_point, cur_point = q.pop()[1]
-        if cur_point in close_list:
+        x, y = cur_point
+        if close_list[x][y] != 0:
             continue
         # record the close list and path list
-        close_list.append(cur_point)
         path[cur_point] = (prev_op, prev_point)
+        close_list[x][y] = 1
         
         traversed += 1
         # goal reached
@@ -107,27 +108,29 @@ def AStar2d(seq1, seq2, scores=None):
         if suc_x is not None:
             # deal with x
             thiscost = s_gap
-            heuristic = heuristic2d(suc_x, m, n, scores)
-            nextprio = cur_cost + thiscost + heuristic
-            q.push(suc_x, 'x', cur_point, cur_cost + thiscost, nextprio)
+            h = heuristic2d(suc_x, m, n, scores)
+            g = cur_cost + thiscost
+            f = g + h
+            q.push(suc_x, 'x', cur_point, g, f)
             # print("suc_x:", suc_x, cur_cost, thiscost, heuristic)
         if suc_y is not None:
             # deal with y
             thiscost = s_gap
-            heuristic = heuristic2d(suc_y, m, n, scores)
-            nextprio = cur_cost + thiscost + heuristic
-            q.push(suc_y, 'y', cur_point, cur_cost + thiscost, nextprio)
+            h = heuristic2d(suc_y, m, n, scores)
+            g = cur_cost + thiscost
+            f = g + h
+            q.push(suc_y, 'y', cur_point, g, f)
             # print("suc_y:", suc_y, cur_cost, thiscost, heuristic)
         if suc_xy is not None:
             # deal with xy
             x, y = suc_xy
             thiscost = s_match if (seq1[x - 1] == seq2[y - 1]) else s_sub
-            heuristic = heuristic2d(suc_xy, m, n, scores)
-            nextprio = cur_cost + thiscost + heuristic
-            q.push(suc_xy, 'xy', cur_point, cur_cost + thiscost, nextprio)
+            h = heuristic2d(suc_xy, m, n, scores)
+            g = cur_cost + thiscost
+            f = g + h
+            q.push(suc_xy, 'xy', cur_point, g, f)
             # print("suc_xy:", suc_xy, cur_cost, thiscost, heuristic)
     score = opt_res
-    print("%d points traversed\n" % traversed)
     return path, score 
 
 def find_successors3d(point, m, n, p):
@@ -147,7 +150,7 @@ def find_successors3d(point, m, n, p):
         suc_z, suc_xz, suc_yz, suc_xyz = None, None, None, None
     return suc_x, suc_y, suc_z, suc_xy, suc_xz, suc_yz, suc_xyz
 
-def suffix_tab(seq1, seq2, seq3, scores):
+
     m, n, p = len(seq1), len(seq2), len(seq3)
     tab_xy = [[float('inf') for _ in range(n + 1)] for _ in range(m + 1)]
     tab_xz = [[float('inf') for _ in range(p + 1)] for _ in range(m + 1)]
@@ -334,7 +337,7 @@ def AStar3d(seq1, seq2, seq3, scores=None):
             q.push(suc_xyz, 'xyz', cur_point, g, f)
             # open_list[x][y][z] = 'pass'
                 
-    print("%d points traversed\n" % traverse)
+    # print("%d points traversed\n" % traverse)
     
     return path, opt_res
 

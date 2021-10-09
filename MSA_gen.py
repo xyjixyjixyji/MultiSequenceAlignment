@@ -271,6 +271,38 @@ def genetic2d(seq1, seq2, scores):
     query_a, seq_a = gen.resolve2d(minimal)
     return score, query_a, seq_a
 
+class Genetic3D():
+    
+    def __init__(self, query, seq1, seq2, nr_eachGen=50, nr_gen=300, \
+        poss_xyz=0.7, poss_xy = 0.06,\
+        poss_mut = 0.001, poss_cross=0.8, \
+        scores=scores):
+        self.query = query
+        self.seq1 = seq1
+        self.seq2 = seq2
+        self.x, self.y, self.z = len(query), len(seq1), len(seq2)
+        # pops is just a bunch of seqs of [x, xy, y, ....]
+        # the indices are corresponding
+        self.pops = []
+        self.costs = []
+        
+        self.nr_eachGen = nr_eachGen
+        self.nr_gen = nr_gen
+        
+        # possibilities
+        self.poss_xyz = poss_xyz
+        self.poss_xy = poss_xy
+        self.poss_xz = poss_xy
+        self.poss_yz = poss_xy
+        self.poss_x = 1 - poss_xyz - 3 * poss_xy
+        self.poss_y = self.poss_x
+        self.poss_z = self.poss_x
+        
+        self.mutation_rate = poss_mut
+        self.crossover_rate = poss_cross
+        
+        self.scores = scores
+
 def test():
     seq1 = 'KJXXJAJKPXKJJXJKPXKJXXJAJKPXKJJXJKPXKJXXJAJKPXKJXXJAJKHXKJXXJAJKPXKJXXJAJKHXKJXX'
     seq2 = 'VXTLKZOKMOKAPHXHMLOWZHTPPHKPKIAXPOXKSKSWJSTSGNSHIOTTLPLLMZKUJHXTPWOWHZGAHLWKKPKMPXOTMZJUOPJ'
