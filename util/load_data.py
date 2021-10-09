@@ -29,3 +29,8 @@ def load_base():
             else:
                 database.append(line[:-1])
     return database
+
+def load_data():
+    query2, query3 = load_query()
+    database = load_base()
+    return query2, query3, database

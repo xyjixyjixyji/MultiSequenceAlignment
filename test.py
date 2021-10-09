@@ -1,6 +1,8 @@
-from typing import Collection
+import json
 
+json_file_path = "hparam.json"
+with open(json_file_path, 'r') as f:
+    params = json.load(f)
 
-import collections
-dic = collections.defaultdict()
-print(dic)
+scores = params['scores']
+print(scores)

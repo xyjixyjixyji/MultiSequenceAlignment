@@ -6,14 +6,14 @@ Algorithms implemented for Multiple Sequence Alignment (MSA)
 * Genetic Algorithm (in other file)
 """
 import time
+import json
 from util.trace_path import resolve_path2d, resolve_path3d
 
-scores = {
-        'match': 0,
-        'sub': 3,
-        'gap': 2,
-    }
+json_file_path = "hparam.json"
+with open(json_file_path, 'r') as f:
+    params = json.load(f)
 
+scores = params['scores']
 
 def DP2d(seq1, seq2, scores: dict):
     '''
