@@ -6,7 +6,7 @@ if __name__ == '__main__':
     
     # run_DP2d(query2, database)
     
-    run_DP3d(query3, database)
+    # run_DP3d(query3, database)
     
     # run_Astar2d(query2, database)
     
@@ -14,4 +14,4 @@ if __name__ == '__main__':
     
     # run_gen2d(query2, database)
     
-    # run_gen3d(query3, database)
+    run_gen3d(query3, database)

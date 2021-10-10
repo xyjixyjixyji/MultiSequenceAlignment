@@ -51,14 +51,14 @@ def run_DP2d(query2, database):
                     # print_count += 1
                     
                     # write the matching info to file
-                    content = "Query: %s\nSeq: %s\nScore: %d\nTime Expired: %.6f second\n" \
+                    content = "Query: %s\nSeq:   %s\nScore: %d\nTime Expired: %.6f second\n" \
                     % (query_a, data_a, score, (end - start_each))
                     
                     f1.write(content + '\n')
             
                 # print("QUERY: %s\n SEQ: %s\n BEST SCORE: %d\n" % (query, best_seq, bestscore))
                 
-                content = "QUERY: %s\nSEQ: %s\nBEST SCORE: %d\nTOTAL TIME EXPIRED: %.6f\nALIGNED:\n%s\n%s\n" \
+                content = "QUERY: %s\nSEQ:   %s\nBEST SCORE: %d\nTOTAL TIME EXPIRED: %.6f\nALIGNED:\n%s\n%s\n" \
                 % (query, best_seq, bestscore, (end - start), best_seq_a, best_query_a)
                 
                 f2.write(content + '\n')
@@ -104,15 +104,15 @@ def run_DP3d(query3, database):
                         count += 1
                         
                         # write the info to file
-                        content = "Query: %s\nSeq1: %s\nSeq2: %s\nScore: %d\nTime Expired: %.6f second\n" % (
+                        content = "Query: %s\nSeq1:  %s\nSeq2:  %s\nScore: %d\nTime Expired: %.6f second\n" % (
                             query_a, seq1_a, seq2_a, score, (end - start_each)
                         )
                         f1.write(content + '\n')
-                content = "Query: %s\nSeq1: %s\nSeq2: %s\nScore: %d\nTotal Time Expired: %.6f second\nALIGNED:\n\%s\n%s\n%s\n" % (
+                content = "Query: %s\nSeq1:  %s\nSeq2:  %s\nScore: %d\nTotal Time Expired: %.6f second\nALIGNED:\n%s\n%s\n%s\n" % (
                             query, best_seq1, best_seq2, best_score, (end - start),
                             best_query_a, best_seq1_a, best_seq2_a)
                 f2.write(content + '\n')
-                                      
+                                  
 def run_Astar2d(query2, database):
     count = 1
     start = time.time()
@@ -149,12 +149,12 @@ def run_Astar2d(query2, database):
                     print_count += 1
                     
                     # write the matching info to file
-                    content = "Query: %s\nSeq: %s\nScore: %d\nTime Expired: %.6f second\n" % (query_a, data_a, score, (end - start_each))
+                    content = "Query: %s\nSeq:   %s\nScore: %d\nTime Expired: %.6f second\n" % (query_a, data_a, score, (end - start_each))
                     f1.write(content + '\n')
                 
                 # print("QUERY: %s\n SEQ: %s\n BEST SCORE: %d\n" % (query, best_seq, bestscore))
                 
-                content = "QUERY: %s\nSEQ: %s\nBEST SCORE: %d\nTOTAL TIME EXPIRED: %.6f\nALIGNED:\n%s\n%s\n" \
+                content = "QUERY: %s\nSEQ:   %s\nBEST SCORE: %d\nTOTAL TIME EXPIRED: %.6f\nALIGNED:\n%s\n%s\n" \
                 % (query, best_seq, bestscore, (end - start), best_seq_a, best_query_a)
                 
                 f2.write(content + '\n')
@@ -200,11 +200,11 @@ def run_Astar3d(query3, database):
                         count += 1
                         
                         # write the info to file
-                        content = "Query: %s\nSeq1: %s\nSeq2: %s\nScore: %d\nTime Expired: %.6f second\n" % (
+                        content = "Query: %s\nSeq1:  %s\nSeq2:  %s\nScore: %d\nTime Expired: %.6f second\n" % (
                             query_a, seq1_a, seq2_a, score, (end - start_each)
                         )
                         f1.write(content + '\n')
-                content = "Query: %s\nSeq1: %s\nSeq2: %s\nScore: %d\nTotal Time Expired: %.6f second\nALIGNED:\n\%s\n%s\n%s\n" % (
+                content = "Query: %s\nSeq1:  %s\nSeq2:  %s\nScore: %d\nTotal Time Expired: %.6f second\nALIGNED:\n%s\n%s\n%s\n" % (
                             query, best_seq1, best_seq2, best_score, (end - start),
                             best_query_a, best_seq1_a, best_seq2_a)
                 f2.write(content + '\n')
@@ -243,13 +243,13 @@ def run_gen2d(query2, database):
                     count += 1
                     
                     # write matching info to file
-                    content = "Query: %s\nSeq: %s\nScore: %d\nTime Expired: %.6f second\n" \
+                    content = "Query: %s\nSeq:    %s\nScore: %d\nTime Expired: %.6f second\n" \
                     % (query_a, seq_a, score, (end - start_each))
                     
                     f1.write(content + '\n')
                 # print("QUERY: %s\n SEQ: %s\n BEST SCORE: %d\n" % (query, best_seq, bestscore))
                 
-                content = "QUERY: %s\nSEQ: %s\nBEST SCORE: %d\nTOTAL TIME EXPIRED: %.6f\nALIGNED:\n%s\n%s\n" \
+                content = "QUERY: %s\nSEQ:   %s\nBEST SCORE: %d\nTOTAL TIME EXPIRED: %.6f\nALIGNED:\n%s\n%s\n" \
                 % (query, best_seq, bestscore, (end - start), best_seq_a, best_query_a)
                 
                 f2.write(content + '\n')
@@ -296,11 +296,11 @@ def run_gen3d(query3, database):
                         count += 1
                         
                         # write the info to file
-                        content = "Query: %s\nSeq1: %s\nSeq2: %s\nScore: %d\nTime Expired: %.6f second\n" % (
+                        content = "Query: %s\nSeq1:  %s\nSeq2:  %s\nScore: %d\nTime Expired: %.6f second\n" % (
                             query_a, seq1_a, seq2_a, score, (end - start_each)
                         )
                         f1.write(content + '\n')
-                content = "Query: %s\nSeq1: %s\nSeq2: %s\nScore: %d\nTotal Time Expired: %.6f second\nALIGNED:\n\%s\n%s\n%s\n" % (
+                content = "Query: %s\nSeq1:  %s\nSeq2:  %s\nScore: %d\nTotal Time Expired: %.6f second\nALIGNED:\n%s\n%s\n%s\n" % (
                             query, best_seq1, best_seq2, best_score, (end - start),
                             best_query_a, best_seq1_a, best_seq2_a)
                 f2.write(content + '\n')

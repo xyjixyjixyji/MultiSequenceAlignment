@@ -7,6 +7,7 @@ Algorithms implemented for Multiple Sequence Alignment (MSA)
 """
 import numpy as np
 import json
+import time
 from MSA_DP import DP2d, DP3d
 
 json_file_path = "hparam.json"
@@ -125,7 +126,17 @@ class Genetic2D():
 
     def mutation(self):
         mutation_rate = self.mutation_rate
-        for indiv in self.pops:
+        # best fit individual do not incoperate the mutation and crossover
+        minindex, mincost = -1, float('inf')
+        for index, cost in enumerate(self.costs):
+            if cost < mincost:
+                mincost = cost
+                minindex = index
+
+        for index, indiv in enumerate(self.pops):
+            if index == minindex:
+                continue
+
             if np.random.rand() < mutation_rate:
                 len_indiv = len(indiv)
                 mut_pos = np.random.randint(0, len_indiv)
@@ -169,6 +180,7 @@ class Genetic2D():
         crossover_rate = self.crossover_rate
         mincost = float('inf')
         minindex = -1
+        # best fit individual do not incoperate the mutation and crossover
         for index, cost in enumerate(self.costs):
             if cost < mincost:
                 mincost = cost
@@ -438,8 +450,19 @@ class Genetic3D():
             * xyz: f(xyz) = xy, insert a z next to it
         '''
         mutation_rate = self.mutation_rate
-        for indiv in self.pops:
-            # operation each individual
+        # best fit individual do not incorperate the mutation
+        mincost = float('inf')
+        minindex = -1
+        for index, cost in enumerate(self.costs):
+            if cost < mincost:
+                mincost = cost
+                minindex = index
+
+        for index, indiv in enumerate(self.pops):
+            # operation each individual except the best
+            if index == minindex:
+                continue
+
             if np.random.rand() < mutation_rate:
                 len_indiv = len(indiv)
                 mut_pos = np.random.randint(0, len_indiv)
@@ -689,8 +712,9 @@ def genetic3d(seq1, seq2, seq3, kwargs, scores):
 def test2d():
     seq1 = 'KJXXJAJKPXKJJXJKPXKJXXJAJKPXKJJXJKPXKJXXJAJKPXKJXXJAJKHXKJXXJAJKPXKJXXJAJKHXKJXX'
     seq2 = 'VXTLKZOKMOKAPHXHMLOWZHTPPHKPKIAXPOXKSKSWJSTSGNSHIOTTLPLLMZKUJHXTPWOWHZGAHLWKKPKMPXOTMZJUOPJ'
-    
-    gen2d= Genetic2D(seq1, seq2)
+    kwargs = params["genetic2d"]
+
+    gen2d= Genetic2D(seq1, seq2, kwargs)
     
     gen2d.run()
     
@@ -704,17 +728,21 @@ def test3d():
     seq1 = 'KJXXJAJKPXKJJXJKPXKJXXJAJKPXKJJXJKPXKJXXJAJKPXKJXXJAJKHXKJXXJAJKPXKJXXJAJKHXKJXX'
     seq2 = 'VXTLKZOKMOKAPHXHMLOWZHTPPHKPKIAXPOXKSKSWJSTSGNSHIOTTLPLLMZKUJHXTPWOWHZGAHLWKKPKMPXOTMZJUOPJ'
     seq3 = 'PJJAPJJPPJJPJJAPJJPPJJPJJAPJJPPJJPJJAPJJPPJJPJJAPJJPPJJPJJAPJJPJJKJJP'
+    kwargs = params["genetic3d"]
 
-    gen3d = Genetic3D(seq1, seq2, seq3)
+    start = time.time()
+    gen3d = Genetic3D(seq1, seq2, seq3, kwargs)
     gen3d.run()
     
     minimal = gen3d.findmin()
+    end = time.time()
     # print(minimal)
     print(gen3d.getcost(minimal))
     
     _, score = DP3d(seq1, seq2, seq3, scores)
     print("optimal: %d" % score)
+    print("TIME EXPIRED: %.6f" % (end - start))
 
 if __name__ == '__main__':
-    # test2d()
+    test2d() 
     test3d()

@@ -9,7 +9,7 @@
         "nr_eachGen": 50,
         "nr_gen": 300,
         "poss_xy": 0.8,
-        "poss_mut": 0.001,
+        "poss_mut": 0.0003,
         "poss_cross": 0.8
     },
 
@@ -18,7 +18,7 @@
         "nr_gen": 300,
         "poss_xyz": 0.7,
         "poss_xy": 0.06,
-        "poss_mut": 0.001,
+        "poss_mut": 0.0003,
         "poss_cross": 0.8
     }
 }
