@@ -4,9 +4,9 @@ if __name__ == '__main__':
     
     query2, query3, database = load_data()
     
-    run_DP2d(query2, database)
+    # run_DP2d(query2, database)
     
-    # run_DP3d(query3, database)
+    run_DP3d(query3, database)
     
     # run_Astar2d(query2, database)
     
