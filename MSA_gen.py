@@ -604,7 +604,7 @@ class Genetic3D():
                     if np.random.rand() < crossover_rate:
                         child[cross_point:] = mother[index + 1:]
             new_pops.append(child)
-        self.pops.clear()
+        # self.pops.clear()
         self.pops.extend(new_pops)
     
     def run(self):

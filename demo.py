@@ -10,8 +10,8 @@ if __name__ == '__main__':
     
     # run_Astar2d(query2, database)
     
-    # run_Astar3d(query3, database)
+    run_Astar3d(query3, database)
     
     # run_gen2d(query2, database)
     
-    run_gen3d(query3, database)
+    # run_gen3d(query3, database)
